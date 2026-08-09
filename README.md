@@ -1,5 +1,5 @@
 # CRUD EXPRESS
-A to-do list that manage data usng SQLite. It involves the creation, deletion, filtering, update and getting the task status/statistics. Check endpoint `/docs` to read all the request of this API using `swagger-ui-express`.
+A to-do list that manage data using Postgres + Docker. It involves the creation, deletion, filtering, update and getting the task status/statistics. Check endpoint `/docs` to read all the request of this API using `swagger-ui-express`.
 
 ## Note to the Evaluator
 I compile all of my tasks in this repository, you can check each history through its designated branches named after
@@ -9,6 +9,7 @@ the task week, act number, and my current course : `W1A1BE`.
 * install dependencies using : `npm install`
 * run using : `npm run dev`
 * to insert mock data on table : `npm run seed`
+* run the container with postgresql18+ image: `docker run --name taskdb -e POSTGRES_PASSWORD=your_secure_password_here -e POSTGRES_DB=tasks -p 5432:5432 -v taskdata:/var/lib/postgresql -d postgres`
 
 ## Table of all Enpoints
 

@@ -2,7 +2,7 @@ import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import fs from 'fs';
 
-import { deleteTask, getTask, getTaskWithID, postTask, updateTask} from './controllers/task.controller.js';
+import { deleteTask, getTasks, getTaskWithID, postTask, updateTask} from './controllers/task.controller.js';
 
 const app = express();
 
@@ -26,7 +26,7 @@ app.get('/health', (req, res) => {
 
 app.get('/tasks/:id', getTaskWithID);
 
-app.get('/tasks', getTask);
+app.get('/tasks', getTasks);
 
 app.post('/tasks', postTask);
 

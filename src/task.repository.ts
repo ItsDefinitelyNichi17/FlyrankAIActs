@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-import pg, { Pool } from 'pg'
+import { Pool } from 'pg'
 import path from 'path'
 import fs from 'fs'
 dotenv.config({path : path.join(import.meta.dirname, "..", ".env")})
@@ -35,4 +35,17 @@ export async function seedTasks() {
     console.log(e)
   }
   return;
+}
+
+
+export async function getTasksQuery(id?: number): Promise<Array<{ id: number, title: string, done: boolean } | undefined>> {
+  try {
+    const result = id ? (await pool.query('SELECT * FROM tasks WHERE id = $1', [id])).rows[0]
+      : (await pool.query('SELECT * FROM tasks')).rows
+      console.log(result)
+    return (result)
+
+  } catch (e) {
+    throw e;
+  }
 }

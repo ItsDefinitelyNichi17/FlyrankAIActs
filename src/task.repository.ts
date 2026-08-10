@@ -49,3 +49,27 @@ export async function getTasksQuery(id?: number): Promise<Array<{ id: number, ti
     throw e;
   }
 }
+
+export async function insertTaskQuery(title: string, done?: boolean) {
+  if(!done) done = false;
+  const query = await pool.query('INSERT INTO tasks(title,done) VALUES($1, $2) RETURNING *', [title, done]);
+  return query.rows[0];
+}
+
+export async function updateTaskQuery(id: number, title: string, done: boolean) {
+  const query = await pool.query('UPDATE tasks SET title = $1, done = $2 WHERE id = $3 RETURNING *', [title, done, id]);
+  return query.rows[0];
+}
+
+export async function deleteTaskQuery(id: number) {
+  const query = await pool.query('DELETE FROM tasks WHERE id = $1 RETURNING *', [id]);
+  return query.rows[0];
+}
+
+export async function idExists(id: number): Promise<{ id: number, title: string, done: boolean } | undefined> {
+  const query = await pool.query('SELECT * FROM tasks WHERE id = $1', [id]);
+  if (!query.rows[0]) {
+    return undefined;
+  }
+  return query?.rows[0];
+}

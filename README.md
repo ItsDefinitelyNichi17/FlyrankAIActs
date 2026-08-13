@@ -5,11 +5,14 @@ A to-do list that manage data using Postgres + Docker. It involves the creation,
 I compile all of my tasks in this repository, you can check each history through its designated branches named after
 the task week, act number, and my current course : `W1A1BE`.
 
-## How to run
+## How to 
 * install dependencies using : `npm install`
 * run using : `npm run dev`
 * to insert mock data on table : `npm run seed`
-* run the container with postgresql18+ image: `docker run --name taskdb -e POSTGRES_PASSWORD=your_secure_password_here -e POSTGRES_DB=tasks -p 5432:5432 -v taskdata:/var/lib/postgresql -d postgres`
+* (make sure to install docker-compose first via your package manager if needed) Compose up the container using : `docker-compose up`
+* To see if the docker is running and its name used : `docker ps`
+* To enter the container's envrinment use : `docker exec -it <container_name> sh or bash`
+* Setting up the environment check the variables [here](./.env.example)
 
 ## Table of all Enpoints
 
@@ -18,11 +21,10 @@ the task week, act number, and my current course : `W1A1BE`.
 | GET    | /         | Details about the API                                                                                               |
 | GET    | /health   | Is the API successfully running?                                                                                    |
 | GET    | /task/:id | Find task via ID                                                                                                    |
-| GET    | /task     | get all the task, you can also retrieve <br>an object filtered out by `search` query                             |
+| GET    | /task     | get all the task                             |
 | POST   | /task     | Create a task, given a .json of `{title, done}`<br>Auto incremented ID based of the total length <br>of the dataset |
 | PUT    | /task/:id | Update a record given the parameter id. <br>pass a .json with `title` and/or `done` status.                         |
-| DELETE | /task/:id | Delete a task given the id parameter                                                                                |
-| GET    | /stats    | Returns the status of the to-do list, `{total, done, open}`                                                         |
+| DELETE | /task/:id | Delete a task given the id }`                                                         |
 
 ## TRY IT!
 * Using curl : `curl -i -X POST http://localhost:3000/tasks -H "Content-Type: application/json" -d '{"title":"Buy milk"}'`
@@ -31,34 +33,30 @@ the task week, act number, and my current course : `W1A1BE`.
 End point `/docs` <br>
 ![Image](src/assets/swagger-screenshot.png)
 
-## SQLite
-### Why SQLite
-SQLite is used for this project because of its persistency. Single file, zero setup, and survive server restarts.
-
+## Postgres
 ### Test it
-To test the database using SQLite, you can run these command on your respective engine viewer.
+To test the database using Postgres, you can run these command on your respective engine viewer.
 * `SELECT * FROM tasks;` : This displays the table consist of all tasks
 * `DROP TABLE tasks;` : This drops the table named tasks, you can create a table using `npm run seed` which also creates mock data. You can also check the [schema.sql](src/schema/task.schema.sql) to create a table
 * `DELETE FROM tasks;`: Delete all record inside the table
 <br>
 <br>
-if you are running this on sqlite3, you can connect to the task.db by running this inside the project:
+if you are running this on psql, you can connect to the task.db by running this inside the project:
 <br>
 
 ```
-sqlite3 task.db
-.open task.db`
+psql -U [username] -d tasks
 ```
 
 <br>
 Then run the commands above to try the database!
 
 ### Sample
-Sample Table from with the use of sqlite3 CLI 
+Sample Table from with the use of psql CLI 
 <br>
 
 `SELECT * FROM this tasks;` 
 
 <br>
     
-![sampledb](src/assets/sampledb.png)
+![sampledb](src/assets/sample_postgres.png)

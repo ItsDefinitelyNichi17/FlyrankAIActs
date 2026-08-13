@@ -41,7 +41,7 @@ To test the database using Postgres, you can run these command on your respectiv
 * `DELETE FROM tasks;`: Delete all record inside the table
 <br>
 <br>
-if you are running this on psql, you can connect to the task.db by running this inside the project:
+if you are running this on psql, you can connect to the the database by running this inside the project:
 <br>
 
 ```

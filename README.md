@@ -8,7 +8,7 @@ the task week, act number, and my current course : `W1A1BE`.
 ## How to 
 * install dependencies using : `npm install`
 * run using : `npm run dev`
-* to insert mock data on table : `npm run seed`
+* to insert mock data on table (no need to run this if you used docker-compose): `npm run seed`
 * (make sure to install docker-compose first via your package manager if needed) Compose up the container using : `docker-compose up`
 * To see if the docker is running and its name used : `docker ps`
 * To enter the container's envrinment use : `docker exec -it <container_name> sh or bash`
